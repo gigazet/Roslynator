@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AddBracesToSwitchSectionWithMultipleStatements.cs" />
     <Compile Include="AddEmptyLineAfterLastStatementInDoStatement.cs" />
+    <Compile Include="AddReturnStatementReturningDefaultValue.cs" />
     <Compile Include="CombineEnumerableWhereMethodChain.cs" />
     <Compile Include="DeclareTypeInsideNamespace.cs" />
     <Compile Include="AvoidUsageOfForStatementToCreateInfiniteLoop.cs" />

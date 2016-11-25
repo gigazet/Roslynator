@@ -534,5 +534,89 @@ namespace Roslynator
         {
             return typeSymbol?.TypeKind == TypeKind.Enum;
         }
+
+        public static bool IsConstructedFromIEnumerableOrIEnumerableOfT(this ITypeSymbol typeSymbol)
+        {
+            if (typeSymbol?.IsNamedType() == true)
+            {
+                var namedTypeSymbol = (INamedTypeSymbol)typeSymbol;
+
+                return namedTypeSymbol.ConstructedFrom.IsSpecialType(
+                    SpecialType.System_Collections_IEnumerable,
+                    SpecialType.System_Collections_Generic_IEnumerable_T);
+            }
+
+            return false;
+        }
+
+        public static bool IsSpecialType(this ITypeSymbol typeSymbol, SpecialType specialType)
+        {
+            return typeSymbol?.SpecialType == specialType;
+        }
+
+        public static bool IsSpecialType(this ITypeSymbol typeSymbol, SpecialType specialType1, SpecialType specialType2)
+        {
+            if (typeSymbol == null)
+                return false;
+
+            SpecialType specialType = typeSymbol.SpecialType;
+
+            return specialType == specialType1
+                || specialType == specialType2;
+        }
+
+        public static bool IsSpecialType(this ITypeSymbol typeSymbol, SpecialType specialType1, SpecialType specialType2, SpecialType specialType3)
+        {
+            if (typeSymbol == null)
+                return false;
+
+            SpecialType specialType = typeSymbol.SpecialType;
+
+            return specialType == specialType1
+                || specialType == specialType2
+                || specialType == specialType3;
+        }
+
+        public static bool IsSpecialType(this ITypeSymbol typeSymbol, SpecialType specialType1, SpecialType specialType2, SpecialType specialType3, SpecialType specialType4)
+        {
+            if (typeSymbol == null)
+                return false;
+
+            SpecialType specialType = typeSymbol.SpecialType;
+
+            return specialType == specialType1
+                || specialType == specialType2
+                || specialType == specialType3
+                || specialType == specialType4;
+        }
+
+        public static bool IsSpecialType(this ITypeSymbol typeSymbol, SpecialType specialType1, SpecialType specialType2, SpecialType specialType3, SpecialType specialType4, SpecialType specialType5)
+        {
+            if (typeSymbol == null)
+                return false;
+
+            SpecialType specialType = typeSymbol.SpecialType;
+
+            return specialType == specialType1
+                || specialType == specialType2
+                || specialType == specialType3
+                || specialType == specialType4
+                || specialType == specialType5;
+        }
+
+        public static bool IsSpecialType(this ITypeSymbol typeSymbol, SpecialType specialType1, SpecialType specialType2, SpecialType specialType3, SpecialType specialType4, SpecialType specialType5, SpecialType specialType6)
+        {
+            if (typeSymbol == null)
+                return false;
+
+            SpecialType specialType = typeSymbol.SpecialType;
+
+            return specialType == specialType1
+                || specialType == specialType2
+                || specialType == specialType3
+                || specialType == specialType4
+                || specialType == specialType5
+                || specialType == specialType6;
+        }
     }
 }

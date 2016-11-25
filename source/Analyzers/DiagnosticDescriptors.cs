@@ -1084,5 +1084,14 @@ namespace Roslynator.CSharp
         );
 
         public static readonly DiagnosticDescriptor RemoveRedundantDelegateCreationFadeOut = RemoveRedundantDelegateCreation.CreateFadeOut();
+
+        public static readonly DiagnosticDescriptor AddReturnStatementReturningDefaultValue = new DiagnosticDescriptor(
+            id: DiagnosticIdentifiers.AddReturnStatementReturningDefaultValue,
+            title: "Add return statement returning default value.",
+            messageFormat: "Consider adding return statement returning default value.",
+            category: DiagnosticCategories.General,
+            defaultSeverity: DiagnosticSeverity.Info,
+            isEnabledByDefault: true
+        );
     }
 }

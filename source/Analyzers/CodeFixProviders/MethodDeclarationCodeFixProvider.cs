@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Roslynator.CSharp.Refactorings;
 
 namespace Roslynator.CSharp.CodeFixProviders
 {
@@ -24,7 +25,8 @@ namespace Roslynator.CSharp.CodeFixProviders
             {
                 return ImmutableArray.Create(
                   DiagnosticIdentifiers.AsynchronousMethodNameShouldEndWithAsync,
-                  DiagnosticIdentifiers.NonAsynchronousMethodNameShouldNotEndWithAsync);
+                  DiagnosticIdentifiers.NonAsynchronousMethodNameShouldNotEndWithAsync,
+                  DiagnosticIdentifiers.AddReturnStatementReturningDefaultValue);
             }
         }
 
@@ -61,7 +63,16 @@ namespace Roslynator.CSharp.CodeFixProviders
                                     diagnostic.Id + EquivalenceKeySuffix);
 
                                 context.RegisterCodeFix(codeAction, diagnostic);
+                                break;
+                            }
+                        case DiagnosticIdentifiers.AddReturnStatementReturningDefaultValue:
+                            {
+                                CodeAction codeAction = CodeAction.Create(
+                                    "Return default value",
+                                    cancellationToken => AddReturnStatementReturningDefaultValueRefactoring.RefactorAsync(context.Document, methodDeclaration, cancellationToken),
+                                    diagnostic.Id + EquivalenceKeySuffix);
 
+                                context.RegisterCodeFix(codeAction, diagnostic);
                                 break;
                             }
                     }
