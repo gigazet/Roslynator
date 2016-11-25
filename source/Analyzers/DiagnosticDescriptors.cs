@@ -1084,5 +1084,14 @@ namespace Roslynator.CSharp
         );
 
         public static readonly DiagnosticDescriptor RemoveRedundantDelegateCreationFadeOut = RemoveRedundantDelegateCreation.CreateFadeOut();
+
+        public static readonly DiagnosticDescriptor AddBreakStatementToSwitchSection = new DiagnosticDescriptor(
+            id: DiagnosticIdentifiers.AddBreakStatementToSwitchSection,
+            title: "Add break statement to switch section.",
+            messageFormat: "Consider adding break statement to switch section.",
+            category: DiagnosticCategories.General,
+            defaultSeverity: DiagnosticSeverity.Info,
+            isEnabledByDefault: true
+        );
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using Roslynator.CSharp.Analyzers;
+using Roslynator.CSharp.Refactorings;
 
 namespace Roslynator.CSharp.DiagnosticAnalyzers
 {
@@ -25,7 +26,8 @@ namespace Roslynator.CSharp.DiagnosticAnalyzers
                     DiagnosticDescriptors.RemoveRedundantDefaultSwitchSection,
                     DiagnosticDescriptors.RemoveUnnecessaryCaseLabel,
                     DiagnosticDescriptors.DefaultLabelShouldBeLastLabelInSwitchSection,
-                    DiagnosticDescriptors.AddBracesToSwitchSectionWithMultipleStatements);
+                    DiagnosticDescriptors.AddBracesToSwitchSectionWithMultipleStatements,
+                    DiagnosticDescriptors.AddBreakStatementToSwitchSection);
             }
         }
 
@@ -45,6 +47,13 @@ namespace Roslynator.CSharp.DiagnosticAnalyzers
             var switchSection = (SwitchSectionSyntax)context.Node;
 
             SyntaxList<StatementSyntax> statements = switchSection.Statements;
+
+            if (AddBreakStatementToSwitchSectionRefactoring.CanRefactor(context, switchSection))
+            {
+                context.ReportDiagnostic(
+                    DiagnosticDescriptors.AddBreakStatementToSwitchSection,
+                    switchSection.GetLocation());
+            }
 
             FormatEachStatementOnSeparateLineAnalyzer.AnalyzeStatements(context, statements);
 
