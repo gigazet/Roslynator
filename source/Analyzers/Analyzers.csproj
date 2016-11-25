@@ -49,6 +49,8 @@
     <Compile Include="CodeFixProviders\DestructorDeclarationCodeFixProvider.cs" />
     <Compile Include="CodeFixProviders\DeclareTypeInsideNamespaceCodeFixProvider.cs" />
     <Compile Include="CodeFixProviders\RemoveRedundantBooleanLiteralCodeFixProvider.cs" />
+    <Compile Include="CodeFixProviders\ReplaceReturnStatementWithExpressionStatementCodeFixProvider.cs" />
+    <Compile Include="DiagnosticAnalyzers\YieldStatementDiagnosticAnalyzer.cs" />
     <Compile Include="Refactorings\AddModifierRefactoring.cs" />
     <Compile Include="CodeFixProviders\DocumentCodeFixProvider.cs" />
     <Compile Include="CodeFixProviders\ClassDeclarationCodeFixProvider.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="CodeFixProviders\StatementCodeFixProvider.cs" />
     <Compile Include="CodeFixProviders\RegionDirectiveTriviaCodeFixProvider.cs" />
     <Compile Include="Refactorings\ReplaceCountMethod\ReplaceCountMethodRefactoring.cs" />
+    <Compile Include="Refactorings\ReplaceReturnStatementWithExpressionStatementRefactoring.cs" />
     <Compile Include="Refactorings\ReplaceSelectWithCastRefactoring.cs" />
     <Compile Include="Refactorings\ReplaceWhereAndCastWithOfTypeRefactoring.cs" />
     <Compile Include="Refactorings\UseStringIsNullOrEmptyMethodRefactoring.cs" />

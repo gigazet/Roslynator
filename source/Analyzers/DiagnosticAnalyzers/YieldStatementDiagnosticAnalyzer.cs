@@ -7,21 +7,18 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
-using Roslynator.CSharp.Analyzers;
 using Roslynator.CSharp.Refactorings;
 
 namespace Roslynator.CSharp.DiagnosticAnalyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class ReturnStatementDiagnosticAnalyzer : BaseDiagnosticAnalyzer
+    public class YieldStatementDiagnosticAnalyzer : BaseDiagnosticAnalyzer
     {
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
         {
             get
             {
                 return ImmutableArray.Create(
-                    DiagnosticDescriptors.MergeLocalDeclarationWithReturnStatement,
-                    DiagnosticDescriptors.MergeLocalDeclarationWithReturnStatementFadeOut,
                     DiagnosticDescriptors.ReplaceReturnStatementWithExpressionStatement,
                     DiagnosticDescriptors.ReplaceReturnStatementWithExpressionStatementFadeOut);
             }
@@ -32,7 +29,7 @@ namespace Roslynator.CSharp.DiagnosticAnalyzers
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
 
-            context.RegisterSyntaxNodeAction(f => AnalyzeReturnStatement(f), SyntaxKind.ReturnStatement);
+            context.RegisterSyntaxNodeAction(f => AnalyzeReturnStatement(f), SyntaxKind.YieldReturnStatement);
         }
 
         private void AnalyzeReturnStatement(SyntaxNodeAnalysisContext context)
@@ -40,16 +37,15 @@ namespace Roslynator.CSharp.DiagnosticAnalyzers
             if (GeneratedCodeAnalyzer?.IsGeneratedCode(context) == true)
                 return;
 
-            var returnStatement = (ReturnStatementSyntax)context.Node;
+            var yieldStatement = (YieldStatementSyntax)context.Node;
 
-            MergeLocalDeclarationWithReturnStatementAnalyzer.Analyze(context);
-
-            if (ReplaceReturnStatementWithExpressionStatementRefactoring.CanRefactor(returnStatement, context.SemanticModel, context.CancellationToken)
-                && !returnStatement.ContainsDirectives(TextSpan.FromBounds(returnStatement.ReturnKeyword.Span.End, returnStatement.Expression.Span.Start)))
+            if (ReplaceReturnStatementWithExpressionStatementRefactoring.CanRefactor(yieldStatement, context.SemanticModel, context.CancellationToken)
+                && !yieldStatement.ContainsDirectives(TextSpan.FromBounds(yieldStatement.YieldKeyword.Span.End, yieldStatement.Expression.Span.Start)))
             {
-                context.ReportDiagnostic(DiagnosticDescriptors.ReplaceReturnStatementWithExpressionStatement, returnStatement.GetLocation(), "return");
+                context.ReportDiagnostic(DiagnosticDescriptors.ReplaceReturnStatementWithExpressionStatement, yieldStatement.GetLocation(), "yield");
 
-                context.FadeOutToken(DiagnosticDescriptors.ReplaceReturnStatementWithExpressionStatementFadeOut, returnStatement.ReturnKeyword);
+                context.FadeOutToken(DiagnosticDescriptors.ReplaceReturnStatementWithExpressionStatementFadeOut, yieldStatement.YieldKeyword);
+                context.FadeOutToken(DiagnosticDescriptors.ReplaceReturnStatementWithExpressionStatementFadeOut, yieldStatement.ReturnOrBreakKeyword);
             }
         }
     }

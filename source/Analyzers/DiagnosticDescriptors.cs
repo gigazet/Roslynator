@@ -1084,5 +1084,16 @@ namespace Roslynator.CSharp
         );
 
         public static readonly DiagnosticDescriptor RemoveRedundantDelegateCreationFadeOut = RemoveRedundantDelegateCreation.CreateFadeOut();
+
+        public static readonly DiagnosticDescriptor ReplaceReturnStatementWithExpressionStatement = new DiagnosticDescriptor(
+            id: DiagnosticIdentifiers.ReplaceReturnStatementWithExpressionStatement,
+            title: "Replace (yield) return statement with expression statement.",
+            messageFormat: "Consider replacing {0} statement with expression statement.",
+            category: DiagnosticCategories.General,
+            defaultSeverity: DiagnosticSeverity.Info,
+            isEnabledByDefault: true
+        );
+
+        public static readonly DiagnosticDescriptor ReplaceReturnStatementWithExpressionStatementFadeOut = ReplaceReturnStatementWithExpressionStatement.CreateFadeOut();
     }
 }
