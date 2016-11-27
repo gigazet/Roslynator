@@ -22,7 +22,7 @@ namespace Roslynator.CSharp.Refactorings
                     ITypeSymbol typeSymbol = semanticModel.GetTypeSymbol(returnType, cancellationToken);
 
                     if (typeSymbol?.IsErrorType() == false
-                        && !typeSymbol.IsConstructedFromIEnumerableOrIEnumerableOfT()
+                        && !typeSymbol.IsIEnumerableOrConstructedFromIEnumerableOfT()
                         && !typeSymbol.IsVoid())
                     {
                         ImmutableArray<Diagnostic> diagnostics = semanticModel.GetDiagnostics(methodDeclaration.Identifier.Span, cancellationToken);
