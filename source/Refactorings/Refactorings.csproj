@@ -244,6 +244,7 @@
     <Compile Include="Refactorings\ReplaceIfElseWithSwitchRefactoring.cs" />
     <Compile Include="Refactorings\ReplaceEqualsExpressionWithStringEqualsRefactoring.cs" />
     <Compile Include="Refactorings\ReplaceAsWithCastRefactoring.cs" />
+    <Compile Include="Refactorings\SplitSwitchLabelsRefactoring.cs" />
     <Compile Include="StringLiteralChain.cs" />
     <Compile Include="SyntaxHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

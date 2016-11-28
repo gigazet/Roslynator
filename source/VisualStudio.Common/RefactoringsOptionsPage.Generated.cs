@@ -158,6 +158,7 @@ namespace Roslynator.VisualStudio
             ReverseForLoop = true;
             SimplifyLambdaExpression = true;
             SplitAttributes = true;
+            SplitSwitchLabels = true;
             SplitVariableDeclaration = true;
             SwapExpressionsInBinaryExpression = true;
             SwapExpressionsInConditionalExpression = true;
@@ -320,6 +321,7 @@ namespace Roslynator.VisualStudio
             SetIsEnabled(RefactoringIdentifiers.ReverseForLoop, ReverseForLoop);
             SetIsEnabled(RefactoringIdentifiers.SimplifyLambdaExpression, SimplifyLambdaExpression);
             SetIsEnabled(RefactoringIdentifiers.SplitAttributes, SplitAttributes);
+            SetIsEnabled(RefactoringIdentifiers.SplitSwitchLabels, SplitSwitchLabels);
             SetIsEnabled(RefactoringIdentifiers.SplitVariableDeclaration, SplitVariableDeclaration);
             SetIsEnabled(RefactoringIdentifiers.SwapExpressionsInBinaryExpression, SwapExpressionsInBinaryExpression);
             SetIsEnabled(RefactoringIdentifiers.SwapExpressionsInConditionalExpression, SwapExpressionsInConditionalExpression);
@@ -1789,6 +1791,16 @@ namespace Roslynator.VisualStudio
         [Description("Syntax: selected attribute list")]
         [TypeConverter(typeof (EnabledDisabledConverter))]
         public bool SplitAttributes
+        {
+            get;
+            set;
+        }
+
+        [Category(RefactoringCategory)]
+        [DisplayName("Split switch labels")]
+        [Description("Syntax: selected switch labels")]
+        [TypeConverter(typeof (EnabledDisabledConverter))]
+        public bool SplitSwitchLabels
         {
             get;
             set;
